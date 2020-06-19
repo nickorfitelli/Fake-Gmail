@@ -3,7 +3,7 @@ import SingleEmail from "./SingleEmail.js";
 
 function EmailBig({ sender, subject }) {
 	const [emailStorage, setEmailStorage] = useState("");
-	let emaillist;
+	let send = []
 
 	useEffect(() => {
 		(async () => {
@@ -15,39 +15,37 @@ function EmailBig({ sender, subject }) {
 				}
                 const jsonResult = await result.json();
 
-                let emailObj = {
-                    sender: jsonResult.map,
-                    recipient: "",
-                    subject: "",
-                    message:"",
-                    date:"",
-                    id: ""
-                }
+                console.log(jsonResult)
+                // let emailObj = {
+                //     sender:jsonResult.map(x=>x.sender),
+                //     recipient: jsonResult.map(x=>x.recipient),
+                //     subject: jsonResult.map(x=>x.subject),
+                //     message:jsonResult.map(x=>x.message),
+                //     date:jsonResult.map(x=>x.date),
+                //     id: jsonResult.map(x=>x.id)
+                // }
 
-               let emails = jsonResult.map((item) => item.sender);
-				setEmailStorage(emails);
+              
+				setEmailStorage(jsonResult);
 
 
-				console.log(emails);
-
-                if (emailStorage === undefined) return
+                // if (emailStorage === undefined) return
                 
-					emaillist = (
-						<>
-							{emails.map((x, i) => (
-								<SingleEmail sender={x} key={i} />
-							))}
-						</>
-                    );
-                    
-                    console.log(emailStorage)
+					//  const emaillist = (
+					// 	<>
+					// 		{this.state.map((x, i) => (
+					// 			<SingleEmail sender={x} key={i} />
+					// 		))}
+					// 	</>
+                    // );
+                
 			}
 		})(); //defines function, immediately calls -> "iffy"
 	}, [emailStorage]);
 
 	return (
 		<div style={{ margin: "1%", width: "100%", height: "100%" }}>
-			<SingleEmail sender={"Nick"} subject = {"This is important"} />
+			<SingleEmail sender={""} subject = {""} />
 							
 		</div>
 	);
